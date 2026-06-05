@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Layout Axara 12 Variasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen p-8">
+
+    <div class="max-w-4xl mx-auto text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-sky-400 mb-3">Cetak Biru 12 Layout Axara</h1>
+        <p class="text-slate-300">Pola ini dilengkapi penanda Area Foto (Gelap) dan Area Konten/Desain (Biru Terang).</p>
+    </div>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        
+        <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+            <h2 class="text-lg font-bold text-emerald-400 mb-4 border-b border-slate-600 pb-2">Tipe Strip (6x2)</h2>
+            <button onclick="buatLayout('Layout_A')" class="w-full bg-slate-700 hover:bg-emerald-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout A (3 Pose, Jarak Renggang)</button>
+            <button onclick="buatLayout('Layout_B')" class="w-full bg-slate-700 hover:bg-emerald-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout B (3 Pose, Jarak Rapat)</button>
+            <button onclick="buatLayout('Layout_C')" class="w-full bg-slate-700 hover:bg-emerald-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout C (4 Pose, Jarak Renggang)</button>
+            <button onclick="buatLayout('Layout_D')" class="w-full bg-slate-700 hover:bg-emerald-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout D (4 Pose, Jarak Rapat)</button>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+            <h2 class="text-lg font-bold text-sky-400 mb-4 border-b border-slate-600 pb-2">Tipe 4R (4 Pose)</h2>
+            <button onclick="buatLayout('Layout_E')" class="w-full bg-slate-700 hover:bg-sky-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout E (1 Besar, 3 Kecil)</button>
+            <button onclick="buatLayout('Layout_F')" class="w-full bg-slate-700 hover:bg-sky-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout F (Grid 2x2 Sama Rata)</button>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+            <h2 class="text-lg font-bold text-purple-400 mb-4 border-b border-slate-600 pb-2">Tipe 4R (2 & 3 Pose)</h2>
+            <button onclick="buatLayout('Layout_G')" class="w-full bg-slate-700 hover:bg-purple-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout G (2 Kecil Kiri, 1 Besar Kanan)</button>
+            <button onclick="buatLayout('Layout_H')" class="w-full bg-slate-700 hover:bg-purple-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout H (1 Besar Atas, 2 Kecil Bawah)</button>
+            <button onclick="buatLayout('Layout_I')" class="w-full bg-slate-700 hover:bg-purple-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout I (2 Kiri, Teks Full Kanan)</button>
+            <button onclick="buatLayout('Layout_J')" class="w-full bg-slate-700 hover:bg-purple-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout J (2 Berjejer Atas, Teks Bawah)</button>
+        </div>
+
+        <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+            <h2 class="text-lg font-bold text-pink-400 mb-4 border-b border-slate-600 pb-2">Tipe 4R (Lainnya)</h2>
+            <button onclick="buatLayout('Layout_K')" class="w-full bg-slate-700 hover:bg-pink-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout K (Portrait 2 Pose Susun)</button>
+            <button onclick="buatLayout('Layout_L')" class="w-full bg-slate-700 hover:bg-pink-600 mb-2 py-2 rounded-lg font-medium transition text-sm">Layout L (Landscape 1 Pose Full)</button>
+        </div>
+
+    </div>
+
+    <script>
+        function buatLayout(tipe) {
+            const kanvas = document.createElement('canvas');
+            const ctx = kanvas.getContext('2d');
+            let set;
+
+            // --- DEKLARASI KOORDINAT (Foto & Area Konten Teks) ---
+
+            if (tipe === 'Layout_A') {
+                set = { lebar: 600, tinggi: 1800, latar: '#e2e8f0',
+                    lubang: [ {x: 40, y: 50, w: 520, h: 420}, {x: 40, y: 520, w: 520, h: 420}, {x: 40, y: 990, w: 520, h: 420} ],
+                    teks: [ {x: 40, y: 1450, w: 520, h: 300, label: "Area Desain Konten"} ]
+                };
+            } else if (tipe === 'Layout_B') {
+                set = { lebar: 600, tinggi: 1800, latar: '#e2e8f0',
+                    lubang: [ {x: 40, y: 150, w: 520, h: 400}, {x: 40, y: 580, w: 520, h: 400}, {x: 40, y: 1010, w: 520, h: 400} ],
+                    teks: [ {x: 40, y: 30, w: 520, h: 90, label: "Konten Atas"}, {x: 40, y: 1450, w: 520, h: 320, label: "Konten Bawah"} ]
+                };
+            } else if (tipe === 'Layout_C') {
+                set = { lebar: 600, tinggi: 1800, latar: '#e2e8f0',
+                    lubang: [ {x: 40, y: 50, w: 520, h: 320}, {x: 40, y: 410, w: 520, h: 320}, {x: 40, y: 770, w: 520, h: 320}, {x: 40, y: 1130, w: 520, h: 320} ],
+                    teks: [ {x: 40, y: 1480, w: 520, h: 280, label: "Area Desain Konten"} ]
+                };
+            } else if (tipe === 'Layout_D') {
+                set = { lebar: 600, tinggi: 1800, latar: '#e2e8f0',
+                    lubang: [ {x: 40, y: 100, w: 520, h: 310}, {x: 40, y: 440, w: 520, h: 310}, {x: 40, y: 780, w: 520, h: 310}, {x: 40, y: 1120, w: 520, h: 310} ],
+                    teks: [ {x: 40, y: 10, w: 520, h: 70, label: "Teks Atas"}, {x: 40, y: 1460, w: 520, h: 320, label: "Teks Bawah"} ]
+                };
+            } else if (tipe === 'Layout_E') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 50, y: 50, w: 900, h: 650}, {x: 50, y: 750, w: 530, h: 350}, {x: 630, y: 750, w: 530, h: 350}, {x: 1210, y: 750, w: 530, h: 350} ],
+                    teks: [ {x: 1000, y: 50, w: 750, h: 650, label: "Area Desain (Logo, Nama, Tanggal)"} ]
+                };
+            } else if (tipe === 'Layout_F') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 60, y: 60, w: 810, h: 440}, {x: 930, y: 60, w: 810, h: 440}, {x: 60, y: 540, w: 810, h: 440}, {x: 930, y: 540, w: 810, h: 440} ],
+                    teks: [ {x: 60, y: 1020, w: 1680, h: 140, label: "Area Konten Horizontal Bawah"} ]
+                };
+            } else if (tipe === 'Layout_G') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 60, y: 60, w: 810, h: 440}, {x: 60, y: 540, w: 810, h: 440}, {x: 930, y: 60, w: 810, h: 650} ],
+                    teks: [ {x: 930, y: 750, w: 810, h: 390, label: "Area Desain Konten"}, {x: 60, y: 1020, w: 810, h: 120, label: "Area Teks Kecil"} ]
+                };
+            } else if (tipe === 'Layout_H') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 60, y: 60, w: 810, h: 650}, {x: 60, y: 750, w: 810, h: 390}, {x: 930, y: 750, w: 810, h: 390} ],
+                    teks: [ {x: 930, y: 60, w: 810, h: 650, label: "Area Desain Konten Utama"} ]
+                };
+            } else if (tipe === 'Layout_I') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 60, y: 60, w: 810, h: 500}, {x: 60, y: 600, w: 810, h: 500} ],
+                    teks: [ {x: 930, y: 60, w: 810, h: 1040, label: "Area Konten Super Besar (Kanan)"} ]
+                };
+            } else if (tipe === 'Layout_J') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 60, y: 60, w: 810, h: 650}, {x: 930, y: 60, w: 810, h: 650} ],
+                    teks: [ {x: 60, y: 750, w: 1680, h: 390, label: "Area Konten Horizontal Utama"} ]
+                };
+            } else if (tipe === 'Layout_K') {
+                set = { lebar: 1200, tinggi: 1800, latar: '#e2e8f0',
+                    lubang: [ {x: 80, y: 80, w: 1040, h: 700}, {x: 80, y: 840, w: 1040, h: 700} ],
+                    teks: [ {x: 80, y: 1580, w: 1040, h: 180, label: "Area Desain Konten Bawah"} ]
+                };
+            } else if (tipe === 'Layout_L') {
+                set = { lebar: 1800, tinggi: 1200, latar: '#e2e8f0',
+                    lubang: [ {x: 80, y: 80, w: 1640, h: 860} ],
+                    teks: [ {x: 80, y: 980, w: 1640, h: 180, label: "Area Konten Bawah Memanjang"} ]
+                };
+            }
+
+            // Atur ukuran kanvas
+            kanvas.width = set.lebar;
+            kanvas.height = set.tinggi;
+
+            // 1. Gambar Latar Belakang Dasar (Kanvas Keseluruhan)
+            ctx.fillStyle = set.latar; 
+            ctx.fillRect(0, 0, kanvas.width, kanvas.height);
+
+            // Tambahkan rincian ukuran kanvas di pojok kiri atas
+            ctx.fillStyle = '#64748b';
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillText(`Ukuran Total Kanvas: ${kanvas.width} x ${kanvas.height} px`, 10, 10);
+
+            // 2. Gambar Area Lubang Foto (Gelap)
+            set.lubang.forEach((box, i) => {
+                ctx.fillStyle = '#1e293b';
+                ctx.fillRect(box.x, box.y, box.w, box.h);
+                
+                // Teks Penanda Area Foto
+                ctx.fillStyle = '#94a3b8';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = 'bold 36px Arial';
+                ctx.fillText(`Area Jepretan ${i + 1}`, box.x + (box.w / 2), box.y + (box.h / 2) - 20);
+                
+                ctx.font = '24px Arial';
+                ctx.fillText(`Bolongi Seukuran: ${box.w} x ${box.h} px`, box.x + (box.w / 2), box.y + (box.h / 2) + 30);
+            });
+
+            // 3. Gambar Area Konten/Desain (Biru Terang)
+            if (set.teks) {
+                set.teks.forEach((txtBox) => {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.2)'; // Warna biru muda transparan
+                    ctx.fillRect(txtBox.x, txtBox.y, txtBox.w, txtBox.h);
+                    
+                    ctx.strokeStyle = '#38bdf8'; // Garis tepi biru muda
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(txtBox.x, txtBox.y, txtBox.w, txtBox.h);
+
+                    // Teks Penanda Area Konten
+                    ctx.fillStyle = '#0369a1';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = 'bold 30px Arial';
+                    ctx.fillText(txtBox.label, txtBox.x + (txtBox.w / 2), txtBox.y + (txtBox.h / 2) - 15);
+                    
+                    ctx.font = '22px Arial';
+                    ctx.fillText(`Maksimal: ${txtBox.w} x ${txtBox.h} px`, txtBox.x + (txtBox.w / 2), txtBox.y + (txtBox.h / 2) + 25);
+                });
+            }
+
+            // Eksekusi Unduhan Otomatis
+            const tautan = document.createElement('a');
+            tautan.download = `${tipe}_Blueprint_Lengkap.png`;
+            tautan.href = kanvas.toDataURL('image/png');
+            tautan.click();
+        }
+    </script>
+</body>
+</html>

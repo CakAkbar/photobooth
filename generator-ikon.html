@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pabrik Ikon Kisi Axara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center p-8">
+
+    <div class="max-w-2xl text-center mb-8">
+        <h1 class="text-4xl font-extrabold text-sky-400 mb-4">Pabrik Ikon Layout Presisi</h1>
+        <p class="text-slate-300">Sistem ini akan membaca koordinat piksel akurat milikmu dan mengubahnya menjadi 12 gambar ikon PNG transparan. Matikan fitur pemblokir pop-up/unduhan (pop-up blocker) di perambanmu sebelum menekan tombol di bawah.</p>
+    </div>
+
+    <button onclick="produksiSemuaIkon()" class="bg-gradient-to-r from-pink-600 to-rose-500 hover:from-pink-500 hover:to-rose-400 text-white font-bold py-5 px-10 rounded-2xl shadow-xl transition transform hover:scale-105 text-lg">
+        <i class="fa-solid fa-download"></i> Cetak & Unduh 12 Ikon Sekarang
+    </button>
+
+    <div id="status" class="mt-6 text-emerald-400 font-bold hidden">Proses pengunduhan sedang berjalan...</div>
+
+    <script>
+        // Menggunakan pangkalan data dengan koordinat yang persis kamu berikan
+        const KumpulanLayout = {
+            'Layout_A': { 
+                namaFile: 'icon_A', lebar: 600, tinggi: 1800, 
+                lubang: [ {x: 40, y: 50, w: 520, h: 420}, {x: 40, y: 520, w: 520, h: 420}, {x: 40, y: 990, w: 520, h: 420} ],
+                teks: [ {x: 40, y: 1450, w: 520, h: 300} ]
+            },
+            'Layout_B': { 
+                namaFile: 'icon_B', lebar: 600, tinggi: 1800, 
+                lubang: [ {x: 40, y: 150, w: 520, h: 400}, {x: 40, y: 580, w: 520, h: 400}, {x: 40, y: 1010, w: 520, h: 400} ],
+                teks: [ {x: 40, y: 30, w: 520, h: 90}, {x: 40, y: 1450, w: 520, h: 320} ]
+            },
+            'Layout_C': { 
+                namaFile: 'icon_C', lebar: 600, tinggi: 1800, 
+                lubang: [ {x: 40, y: 50, w: 520, h: 320}, {x: 40, y: 410, w: 520, h: 320}, {x: 40, y: 770, w: 520, h: 320}, {x: 40, y: 1130, w: 520, h: 320} ],
+                teks: [ {x: 40, y: 1480, w: 520, h: 280} ]
+            },
+            'Layout_D': { 
+                namaFile: 'icon_D', lebar: 600, tinggi: 1800, 
+                lubang: [ {x: 40, y: 100, w: 520, h: 310}, {x: 40, y: 440, w: 520, h: 310}, {x: 40, y: 780, w: 520, h: 310}, {x: 40, y: 1120, w: 520, h: 310} ],
+                teks: [ {x: 40, y: 10, w: 520, h: 70}, {x: 40, y: 1460, w: 520, h: 320} ]
+            },
+            'Layout_E': { 
+                namaFile: 'icon_E', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 50, y: 50, w: 900, h: 650}, {x: 50, y: 750, w: 530, h: 350}, {x: 630, y: 750, w: 530, h: 350}, {x: 1210, y: 750, w: 530, h: 350} ],
+                teks: [ {x: 1000, y: 50, w: 750, h: 650} ]
+            },
+            'Layout_F': { 
+                namaFile: 'icon_F', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 60, y: 60, w: 810, h: 440}, {x: 930, y: 60, w: 810, h: 440}, {x: 60, y: 540, w: 810, h: 440}, {x: 930, y: 540, w: 810, h: 440} ],
+                teks: [ {x: 60, y: 1020, w: 1680, h: 140} ]
+            },
+            'Layout_G': { 
+                namaFile: 'icon_G', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 60, y: 60, w: 810, h: 440}, {x: 60, y: 540, w: 810, h: 440}, {x: 930, y: 60, w: 810, h: 650} ],
+                teks: [ {x: 930, y: 750, w: 810, h: 390}, {x: 60, y: 1020, w: 810, h: 120} ]
+            },
+            'Layout_H': { 
+                namaFile: 'icon_H', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 60, y: 60, w: 810, h: 650}, {x: 60, y: 750, w: 810, h: 390}, {x: 930, y: 750, w: 810, h: 390} ],
+                teks: [ {x: 930, y: 60, w: 810, h: 650} ]
+            },
+            'Layout_I': { 
+                namaFile: 'icon_I', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 60, y: 60, w: 810, h: 500}, {x: 60, y: 600, w: 810, h: 500} ],
+                teks: [ {x: 930, y: 60, w: 810, h: 1040} ]
+            },
+            'Layout_J': { 
+                namaFile: 'icon_J', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 60, y: 60, w: 810, h: 650}, {x: 930, y: 60, w: 810, h: 650} ],
+                teks: [ {x: 60, y: 750, w: 1680, h: 390} ]
+            },
+            'Layout_K': { 
+                namaFile: 'icon_K', lebar: 1200, tinggi: 1800, 
+                lubang: [ {x: 80, y: 80, w: 1040, h: 700}, {x: 80, y: 840, w: 1040, h: 700} ],
+                teks: [ {x: 80, y: 1580, w: 1040, h: 180} ]
+            },
+            'Layout_L': { 
+                namaFile: 'icon_L', lebar: 1800, tinggi: 1200, 
+                lubang: [ {x: 80, y: 80, w: 1640, h: 860} ],
+                teks: [ {x: 80, y: 980, w: 1640, h: 180} ]
+            }
+        };
+
+        function buatGambarIkon(data) {
+            const kanvas = document.createElement('canvas');
+            const ctx = kanvas.getContext('2d');
+            
+            kanvas.width = data.lebar;
+            kanvas.height = data.tinggi;
+
+            // 1. Gambar Kertas Dasar (Warna Putih)
+            ctx.fillStyle = '#ffffff'; 
+            ctx.fillRect(0, 0, kanvas.width, kanvas.height);
+
+            // Beri garis tepi agar ikon terlihat tegas
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.strokeRect(0, 0, kanvas.width, kanvas.height);
+
+            // 2. Gambar Area Lubang Foto (Warna Biru Gelap)
+            ctx.fillStyle = '#1e293b'; 
+            data.lubang.forEach(l => ctx.fillRect(l.x, l.y, l.w, l.h));
+
+            // 3. Gambar Area Teks/Konten (Warna Abu-abu Terang)
+            if(data.teks) {
+                ctx.fillStyle = '#f1f5f9'; 
+                data.teks.forEach(t => {
+                    ctx.fillRect(t.x, t.y, t.w, t.h);
+                    
+                    // Tambahkan garis aksen kecil sebagai tanda "Ini area teks"
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillRect(t.x + 20, t.y + 20, t.w - 40, 20);
+                    ctx.fillRect(t.x + 20, t.y + 60, (t.w - 40) / 2, 20);
+                    ctx.fillStyle = '#f1f5f9'; // Kembalikan warna
+                });
+            }
+
+            return kanvas.toDataURL('image/png');
+        }
+
+        function produksiSemuaIkon() {
+            document.getElementById('status').classList.remove('hidden');
+            let delay = 0;
+            
+            Object.values(KumpulanLayout).forEach((data) => {
+                setTimeout(() => {
+                    const dataGambar = buatGambarIkon(data);
+                    const tautan = document.createElement('a');
+                    tautan.download = data.namaFile + '.png';
+                    tautan.href = dataGambar;
+                    tautan.click();
+                }, delay);
+                
+                // Jeda 400 milidetik antar unduhan agar browser tidak error
+                delay += 400; 
+            });
+
+            setTimeout(() => {
+                document.getElementById('status').innerText = "12 Ikon berhasil diunduh! Silakan pindahkan ke folder assets/icons/";
+            }, delay + 500);
+        }
+    </script>
+</body>
+</html>
